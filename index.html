@@ -1,0 +1,1419 @@
+```
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: 'Geist', sans-serif;
+        background-color: var(--bg-cream);
+        color: var(--text-dark);
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    /* App Shell Layout */
+    .app-container {
+        display: grid;
+        grid-template-columns: 260px 1fr;
+        min-height: 100vh;
+    }
+
+    /* Sticky Navigation Header */
+    .top-nav {
+        grid-column: 1 / -1;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: rgba(255, 253, 249, 0.85);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(226, 151, 156, 0.15);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 40px;
+        height: 80px;
+    }
+
+    .nav-brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .nav-brand .logo-icon {
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(135deg, var(--primary-pink), var(--accent-rose));
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.1rem;
+        box-shadow: 0 4px 12px rgba(226, 151, 156, 0.2);
+    }
+
+    .brand-text h1 {
+        font-size: 1.15rem;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: var(--text-dark);
+    }
+
+    .brand-text span {
+        display: block;
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        font-weight: 300;
+    }
+
+    .nav-menu {
+        display: flex;
+        gap: 8px;
+        height: 100%;
+        align-items: center;
+    }
+
+    .nav-link {
+        text-decoration: none;
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        font-weight: 400;
+        padding: 10px 18px;
+        border-radius: var(--radius-sm);
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .nav-link:hover, .nav-link.active {
+        color: var(--accent-rose-deep);
+        background: var(--primary-pink);
+    }
+
+    .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+    }
+
+    .search-wrapper {
+        position: relative;
+    }
+
+    .search-wrapper i {
+        position: absolute;
+        left: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-muted);
+        font-size: 0.85rem;
+    }
+
+    .search-input {
+        background: var(--warm-beige);
+        border: 1px solid transparent;
+        padding: 10px 16px 10px 38px;
+        border-radius: 30px;
+        font-family: inherit;
+        font-size: 0.85rem;
+        width: 220px;
+        transition: var(--transition);
+        color: var(--text-dark);
+    }
+
+    .search-input:focus {
+        outline: none;
+        background: white;
+        border-color: var(--accent-rose);
+        box-shadow: 0 0 0 4px rgba(226, 151, 156, 0.1);
+    }
+
+    .notification-trigger {
+        position: relative;
+        background: none;
+        border: none;
+        color: var(--text-dark);
+        font-size: 1.1rem;
+        cursor: pointer;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: var(--transition);
+    }
+
+    .notification-trigger:hover {
+        background: var(--warm-beige);
+    }
+
+    .notification-badge {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 7px;
+        height: 7px;
+        background: var(--accent-rose);
+        border-radius: 50%;
+    }
+
+    /* Sidebar Component */
+    .sidebar {
+        background: var(--bg-vanilla);
+        border-right: 1px solid rgba(226, 151, 156, 0.15);
+        padding: 40px 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+    }
+
+    .sidebar-section h3 {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        color: var(--text-muted);
+        margin-bottom: 16px;
+        padding-left: 12px;
+        font-weight: 500;
+    }
+
+    .sidebar-menu {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .sidebar-item a {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 16px;
+        color: var(--text-dark);
+        text-decoration: none;
+        font-size: 0.9rem;
+        border-radius: var(--radius-md);
+        transition: var(--transition);
+        font-weight: 400;
+    }
+
+    .sidebar-item a i {
+        color: var(--text-muted);
+        font-size: 0.95rem;
+        width: 24px;
+        transition: var(--transition);
+    }
+
+    .sidebar-item a .menu-label {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .sidebar-item a:hover {
+        background: var(--bg-cream);
+        padding-left: 20px;
+    }
+
+    .sidebar-item a:hover i {
+        color: var(--accent-rose);
+    }
+
+    .sidebar-badge {
+        font-size: 0.75rem;
+        background: var(--warm-beige);
+        padding: 2px 8px;
+        border-radius: 20px;
+        color: var(--soft-brown);
+        font-weight: 500;
+    }
+
+    .sidebar-badge.alert {
+        background: var(--primary-pink);
+        color: var(--accent-rose-deep);
+    }
+
+    /* Main Workspace Container */
+    .main-workspace {
+        padding: 40px;
+        max-width: 1600px;
+        width: 100%;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    /* Dashboard Header Component */
+    .workspace-header {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .greeting-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+
+    .greeting-meta h2 {
+        font-size: 2rem;
+        font-weight: 300;
+        color: var(--text-dark);
+    }
+
+    .greeting-meta h2 strong {
+        font-weight: 500;
+    }
+
+    .greeting-meta p {
+        color: var(--text-muted);
+        font-size: 0.95rem;
+        margin-top: 4px;
+    }
+
+    .user-profile {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        background: var(--bg-vanilla);
+        padding: 8px 18px 8px 8px;
+        border-radius: 40px;
+        border: 1px solid rgba(226, 151, 156, 0.15);
+    }
+
+    .avatar {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--light-gold), var(--accent-rose));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 500;
+        font-size: 0.9rem;
+        letter-spacing: 0.5px;
+    }
+
+    .profile-info h4 {
+        font-size: 0.85rem;
+        font-weight: 500;
+    }
+
+    .profile-info span {
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        display: block;
+    }
+
+    /* Today's Business Overview Card */
+    .overview-banner {
+        background: linear-gradient(135deg, #FFFDF9 0%, #FFF7F7 100%);
+        border: 1px solid rgba(226, 151, 156, 0.2);
+        border-radius: var(--radius-lg);
+        padding: 24px 32px;
+        box-shadow: var(--card-shadow);
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 24px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .overview-banner::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -10%;
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(circle, rgba(252,234,237,0.4) 0%, rgba(255,255,255,0) 70%);
+        pointer-events: none;
+    }
+
+    .overview-metric {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        border-right: 1px solid rgba(226, 151, 156, 0.15);
+        padding-right: 16px;
+    }
+
+    .overview-metric:last-child {
+        border-right: none;
+        padding-right: 0;
+    }
+
+    .overview-metric span {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: var(--text-muted);
+        font-weight: 500;
+    }
+
+    .overview-metric h3 {
+        font-size: 1.4rem;
+        font-weight: 500;
+        color: var(--text-dark);
+    }
+
+    .overview-metric p {
+        font-size: 0.85rem;
+        color: var(--soft-brown);
+    }
+
+    /* Progress Bar Integration */
+    .metric-progress-container {
+        width: 100%;
+        height: 6px;
+        background: var(--warm-beige);
+        border-radius: 10px;
+        margin-top: 6px;
+        overflow: hidden;
+    }
+
+    .metric-progress-bar {
+        height: 100%;
+        background: linear-gradient(90deg, var(--accent-rose), var(--accent-rose-deep));
+        border-radius: 10px;
+        transition: width 1s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Content Sections Grids */
+    .dashboard-grid-4 {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 24px;
+    }
+
+    .dashboard-grid-2 {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 32px;
+    }
+
+    .dashboard-grid-1 {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+
+    .dashboard-split-layout {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 32px;
+    }
+
+    /* UI Cards Archetype */
+    .ui-card {
+        background: var(--bg-vanilla);
+        border: 1px solid rgba(226, 151, 156, 0.12);
+        border-radius: var(--radius-lg);
+        padding: 32px;
+        box-shadow: var(--card-shadow);
+        transition: var(--transition);
+        position: relative;
+    }
+
+    .ui-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--hover-shadow);
+        border-color: rgba(226, 151, 156, 0.25);
+    }
+
+    /* Section Block Typography */
+    .card-header-block {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 24px;
+    }
+
+    .card-title-area h3 {
+        font-size: 1.1rem;
+        font-weight: 500;
+        color: var(--text-dark);
+        letter-spacing: -0.3px;
+    }
+
+    .card-title-area p {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        margin-top: 2px;
+    }
+
+    /* Stats Cards Archetype */
+    .stat-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 160px;
+    }
+
+    .stat-icon-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .stat-icon-box {
+        width: 44px;
+        height: 44px;
+        background: var(--bg-cream);
+        border-radius: var(--radius-md);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--accent-rose);
+        font-size: 1.1rem;
+        border: 1px solid rgba(226, 151, 156, 0.1);
+    }
+
+    .stat-trend {
+        font-size: 0.75rem;
+        font-weight: 500;
+        padding: 4px 8px;
+        border-radius: 20px;
+    }
+
+    .stat-trend.up {
+        background: var(--muted-sage-bg);
+        color: var(--soft-brown);
+    }
+
+    .stat-trend.neutral {
+        background: var(--warm-beige);
+        color: var(--text-muted);
+    }
+
+    .stat-number-space {
+        margin-top: 24px;
+    }
+
+    .stat-number-space h2 {
+        font-size: 2.2rem;
+        font-weight: 300;
+        line-height: 1;
+        color: var(--text-dark);
+        letter-spacing: -1px;
+    }
+
+    .stat-number-space p {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        margin-top: 6px;
+    }
+
+    /* Data Tables Component */
+    .table-responsive-wrapper {
+        overflow-x: auto;
+        width: 100%;
+    }
+
+    .premium-data-table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: left;
+        font-size: 0.88rem;
+    }
+
+    .premium-data-table th {
+        font-weight: 500;
+        color: var(--text-muted);
+        padding: 16px;
+        border-bottom: 1px solid var(--warm-beige);
+        font-size: 0.78rem;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+    }
+
+    .premium-data-table td {
+        padding: 18px 16px;
+        border-bottom: 1px solid rgba(226, 151, 156, 0.06);
+        color: var(--text-dark);
+        vertical-align: middle;
+    }
+
+    .premium-data-table tr:last-child td {
+        border-bottom: none;
+    }
+
+    .premium-data-table tbody tr {
+        transition: var(--transition);
+    }
+
+    .premium-data-table tbody tr:hover {
+        background: rgba(253, 250, 247, 0.6);
+    }
+
+    /* Status UI Component Pills */
+    .status-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 500;
+    }
+
+    .status-pill::before {
+        content: '';
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+    }
+
+    .status-pill.completed {
+        background: var(--muted-sage-bg);
+        color: #4A5E51;
+    }
+    .status-pill.completed::before { background: var(--muted-sage); }
+
+    .status-pill.pending {
+        background: var(--light-gold-bg);
+        color: #7A6235;
+    }
+    .status-pill.pending::before { background: var(--light-gold); }
+
+    .status-pill.active-run {
+        background: var(--primary-pink);
+        color: var(--accent-rose-deep);
+    }
+    .status-pill.active-run::before { background: var(--accent-rose); }
+
+    /* Priority Architecture Label */
+    .priority-label {
+        font-size: 0.75rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    .priority-label.high { color: var(--accent-rose-deep); }
+    .priority-label.medium { color: var(--light-gold); }
+    .priority-label.low { color: var(--muted-sage); }
+
+    /* Embedded Flex Lists Grid cards */
+    .flex-cards-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+    }
+
+    .inner-item-card {
+        background: var(--bg-cream);
+        border: 1px solid rgba(226, 151, 156, 0.08);
+        border-radius: var(--radius-md);
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        transition: var(--transition);
+    }
+
+    .inner-item-card:hover {
+        background: white;
+        border-color: rgba(226, 151, 156, 0.2);
+        box-shadow: var(--card-shadow);
+    }
+
+    .card-meta-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+
+    .card-meta-row h4 {
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: var(--text-dark);
+    }
+
+    .card-meta-row p {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+    }
+
+    .detail-list-specs {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .spec-line {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.8rem;
+    }
+
+    .spec-line span:first-child {
+        color: var(--text-muted);
+    }
+
+    .spec-line span:last-child {
+        color: var(--text-dark);
+        font-weight: 500;
+    }
+
+    /* Review Card Component Custom UI */
+    .review-card-layout {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    .stars-row {
+        color: var(--light-gold);
+        font-size: 0.75rem;
+        display: flex;
+        gap: 2px;
+    }
+
+    .review-text-quote {
+        font-size: 0.85rem;
+        color: var(--soft-brown);
+        font-style: italic;
+        line-height: 1.5;
+    }
+
+    /* pure CSS chart implementation */
+    .css-chart-flex-container {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        margin-top: 10px;
+    }
+
+    .chart-row-element {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .chart-row-label-space {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.82rem;
+    }
+
+    .chart-row-label-space span:first-child {
+        color: var(--text-dark);
+        font-weight: 400;
+    }
+
+    .chart-row-label-space span:last-child {
+        color: var(--text-muted);
+        font-weight: 500;
+    }
+
+    .chart-track-bg {
+        width: 100%;
+        height: 28px;
+        background: var(--bg-cream);
+        border-radius: var(--radius-sm);
+        overflow: hidden;
+        position: relative;
+    }
+
+    .chart-fill-bar {
+        height: 100%;
+        background: linear-gradient(90deg, rgba(250,230,232,0.6), var(--primary-pink));
+        border-right: 2px solid var(--accent-rose);
+        border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+        transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Master Footer Component */
+    .master-app-footer {
+        background: var(--bg-vanilla);
+        border-top: 1px solid rgba(226, 151, 156, 0.15);
+        padding: 40px;
+        margin-top: 40px;
+    }
+
+    .footer-content-alignment {
+        max-width: 1600px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 32px;
+    }
+
+    .footer-meta-block {
+        max-width: 400px;
+    }
+
+    .footer-meta-block h4 {
+        font-size: 0.95rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: var(--text-dark);
+        margin-bottom: 12px;
+    }
+
+    .footer-meta-block p {
+        font-size: 0.82rem;
+        color: var(--text-muted);
+        line-height: 1.6;
+    }
+
+    .footer-links-row {
+        display: flex;
+        gap: 48px;
+    }
+
+    .footer-links-column {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .footer-links-column h5 {
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        color: var(--text-muted);
+        margin-bottom: 4px;
+    }
+
+    .footer-links-column a {
+        font-size: 0.82rem;
+        color: var(--text-dark);
+        text-decoration: none;
+        transition: var(--transition);
+    }
+
+    .footer-links-column a:hover {
+        color: var(--accent-rose-deep);
+    }
+
+    .footer-app-version {
+        font-size: 0.82rem;
+        color: var(--text-muted);
+        background: var(--bg-cream);
+        padding: 4px 12px;
+        border-radius: 20px;
+        display: inline-block;
+    }
+
+    /* Responsive Layout Overrides */
+    @media (max-width: 1400px) {
+        .dashboard-grid-4 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        .dashboard-split-layout {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @media (max-width: 1100px) {
+        .app-container {
+            grid-template-columns: 1fr;
+        }
+        .sidebar {
+            display: none;
+        }
+        .top-nav {
+            padding: 0 24px;
+        }
+        .nav-menu {
+            display: none; /* Modern responsive dashboards build overlay mobile menus */
+        }
+        .overview-banner {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .main-workspace {
+            padding: 20px;
+            gap: 24px;
+        }
+        .workspace-header {
+            gap: 16px;
+        }
+        .greeting-meta h2 {
+            font-size: 1.5rem;
+        }
+        .overview-banner {
+            grid-template-columns: 1fr;
+            padding: 20px;
+        }
+        .overview-metric {
+            border-right: none;
+            border-bottom: 1px solid rgba(226, 151, 156, 0.15);
+            padding-right: 0;
+            padding-bottom: 12px;
+        }
+        .overview-metric:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        .dashboard-grid-2 {
+            grid-template-columns: 1fr;
+        }
+        .dashboard-grid-4 {
+            grid-template-columns: 1fr;
+        }
+        .search-input {
+            width: 140px;
+        }
+        .footer-content-alignment {
+            flex-direction: column;
+            gap: 24px;
+        }
+        .footer-links-row {
+            width: 100%;
+            justify-content: space-between;
+            gap: 16px;
+        }
+    }
+</style>
+
+```
+
+```
+<div class="app-container">
+    
+    <header class="top-nav">
+        <div class="nav-brand">
+            <div class="logo-icon">
+                <i class="fa-solid : fa-wheat-awn"></i>
+            </div>
+            <div class="brand-text">
+                <h1>ROSEBAKERY</h1>
+                <span>Manager</span>
+            </div>
+        </div>
+
+        <nav class="nav-menu">
+            <a href="#dashboard" class="nav-link active"><i class="fa-solid fa-chart-pie"></i> Dashboard</a>
+            <a href="#orders" class="nav-link"><i class="fa-solid fa-basket-shopping"></i> Orders</a>
+            <a href="#products" class="nav-link"><i class="fa-solid fa-cake-candles"></i> Products</a>
+            <a href="#inventory" class="nav-link"><i class="fa-solid fa-boxes-stacked"></i> Inventory</a>
+            <a href="#employees" class="nav-link"><i class="fa-solid fa-users"></i> Employees</a>
+            <a href="#customers" class="nav-link"><i class="fa-solid fa-heart"></i> Customers</a>
+            <a href="#reports" class="nav-link"><i class="fa-solid fa-file-invoice-dollar"></i> Reports</a>
+            <a href="#settings" class="nav-link"><i class="fa-solid fa-sliders"></i> Settings</a>
+        </nav>
+
+        <div class="nav-actions">
+            <div class="search-wrapper">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="Search analytics..." class="search-input">
+            </div>
+            <button class="notification-trigger" aria-label="View notifications">
+                <i class="fa-regular fa-bell"></i>
+                <div class="notification-badge"></div>
+            </button>
+        </div>
+    </header>
+
+    <aside class="sidebar">
+        <div class="sidebar-section">
+            <h3>Main Operations</h3>
+            <ul class="sidebar-menu">
+                <li class="sidebar-item">
+                    <a href="#dashboard">
+                        <span class="menu-label"><i class="fa-solid fa-gauge"></i> Overview</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="#orders">
+                        <span class="menu-label"><i class="fa-solid fa-circle-dot"></i> Today's Orders</span>
+                        <span class="sidebar-badge">24</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="#pending">
+                        <span class="menu-label"><i class="fa-solid fa-clock"></i> Pending Orders</span>
+                        <span class="sidebar-badge alert">7</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="sidebar-section">
+            <h3>Kitchen Hub</h3>
+            <ul class="sidebar-menu">
+                <li class="sidebar-item">
+                    <a href="#production">
+                        <span class="menu-label"><i class="fa-solid fa-fire-burner"></i> Production Schedule</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="#inventory">
+                        <span class="menu-label"><i class="fa-solid fa-warehouse"></i> Inventory Status</span>
+                        <span class="sidebar-badge">Low Stock</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="#schedule">
+                        <span class="menu-label"><i class="fa-solid fa-calendar-days"></i> Employee Roster</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="sidebar-section">
+            <h3>Intelligence</h3>
+            <ul class="sidebar-menu">
+                <li class="sidebar-item">
+                    <a href="#reviews">
+                        <span class="menu-label"><i class="fa-solid fa-star-half-stroke"></i> Guest Reviews</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="#reports">
+                        <span class="menu-label"><i class="fa-solid fa-chart-line"></i> Monthly Reports</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </aside>
+
+    <main class="main-workspace">
+        
+        <section class="workspace-header">
+            <div class="greeting-meta">
+                <div>
+                    <h2>Bonjour, <strong>Chef Sabillah</strong></h2>
+                    <p>Freshly Baked. Perfectly Managed. Here is your bakery's status for today.</p>
+                </div>
+                <div class="user-profile">
+                    <div class="avatar">SO</div>
+                    <div class="profile-info">
+                        <h4>Sabillah O.</h4>
+                        <span>Head Patissier</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="overview-banner">
+                <div class="overview-metric">
+                    <span>Today's Gross Sales</span>
+                    <h3>$2,480.50</h3>
+                    <p>+14% from yesterday morning</p>
+                </div>
+                <div class="overview-metric">
+                    <span>Active Orders processed</span>
+                    <h3>42 / 56</h3>
+                    <p>14 currently in oven queue</p>
+                </div>
+                <div class="overview-metric">
+                    <span>Production Pipeline</span>
+                    <h3>78% Completed</h3>
+                    <div class="metric-progress-container">
+                        <div class="metric-progress-bar" style="width: 78%;"></div>
+                    </div>
+                </div>
+                <div class="overview-metric">
+                    <span>Current Shift Station</span>
+                    <h3>Morning Bake Crew</h3>
+                    <p>04:00 AM — 01:00 PM</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="dashboard-grid-4">
+            <div class="ui-card stat-card">
+                <div class="stat-icon-row">
+                    <div class="stat-icon-box"><i class="fa-solid fa-bag-shopping"></i></div>
+                    <span class="stat-trend up">+8.2%</span>
+                </div>
+                <div class="stat-number-space">
+                    <h2>56</h2>
+                    <p>Today's Orders placed</p>
+                </div>
+            </div>
+
+            <div class="ui-card stat-card">
+                <div class="stat-icon-row">
+                    <div class="stat-icon-box"><i class="fa-solid fa-coins"></i></div>
+                    <span class="stat-trend up">+12.4%</span>
+                </div>
+                <div class="stat-number-space">
+                    <h2>$14,245.00</h2>
+                    <p>Total Revenue generated this week</p>
+                </div>
+            </div>
+
+            <div class="ui-card stat-card">
+                <div class="stat-icon-row">
+                    <div class="stat-icon-box"><i class="fa-solid fa-bread-slice"></i></div>
+                    <span class="stat-trend neutral">Steady</span>
+                </div>
+                <div class="stat-number-space">
+                    <h2>312</h2>
+                    <p>Artisan Products Sold today</p>
+                </div>
+            </div>
+
+            <div class="ui-card stat-card">
+                <div class="stat-icon-row">
+                    <div class="stat-icon-box"><i class="fa-solid fa-truck-ramp-box"></i></div>
+                    <span class="stat-trend alert">Action Req.</span>
+                </div>
+                <div class="stat-number-space">
+                    <h2>9</h2>
+                    <p>Pending Courier Deliveries</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="ui-card">
+            <div class="card-header-block">
+                <div class="card-title-area">
+                    <h3>Recent Transactions Pipeline</h3>
+                    <p>Live update feed of client orders and custom commissions</p>
+                </div>
+            </div>
+            <div class="table-responsive-wrapper">
+                <table class="premium-data-table">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Customer Name</th>
+                            <th>Products Selected</th>
+                            <th>Order Time</th>
+                            <th>Payment</th>
+                            <th>Delivery Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>#RB-2041</strong></td>
+                            <td>Eleanor Vance</td>
+                            <td>Sourdough Boule (2), Almond Croissant (4)</td>
+                            <td>09:14 AM</td>
+                            <td><span class="status-pill completed">Paid</span></td>
+                            <td><span class="status-pill completed">Delivered</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>#RB-2042</strong></td>
+                            <td>Marcus Sterling</td>
+                            <td>Custom Vanilla Bean Celebration Cake (1)</td>
+                            <td>09:45 AM</td>
+                            <td><span class="status-pill completed">Paid</span></td>
+                            <td><span class="status-pill active-run">In Transit</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>#RB-2043</strong></td>
+                            <td>Clara Montgomery</td>
+                            <td>Pain au Chocolat (6), Espresso Roast Beans</td>
+                            <td>10:12 AM</td>
+                            <td><span class="status-pill pending">Pending Authorize</span></td>
+                            <td><span class="status-pill pending">Awaiting Pack</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>#RB-2044</strong></td>
+                            <td>Julian Ross</td>
+                            <td>Classic Brioche Loaf (2), Raspberry Tart (3)</td>
+                            <td>10:30 AM</td>
+                            <td><span class="status-pill completed">Paid</span></td>
+                            <td><span class="status-pill pending">Oven Queue</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <div class="dashboard-split-layout">
+            <section class="ui-card">
+                <div class="card-header-block">
+                    <div class="card-title-area">
+                        <h3>Kitchen Production Schedule</h3>
+                        <p>Active oven batches running and planned kitchen priorities</p>
+                    </div>
+                </div>
+                <div class="flex-cards-grid">
+                    <div class="inner-item-card">
+                        <div class="card-meta-row">
+                            <div>
+                                <h4>Organic Sourdough Boules</h4>
+                                <p>Batch code: SD-09</p>
+                            </div>
+                            <span class="status-pill active-run">Baking</span>
+                        </div>
+                        <div class="detail-list-specs">
+                            <div class="spec-line"><span>Target Quantity</span><span>40 Units</span></div>
+                            <div class="spec-line"><span>Assigned Lead</span><span>Baker Jean-Louis</span></div>
+                            <div class="spec-line"><span>Est. Finish Time</span><span>11:45 AM</span></div>
+                            <div class="spec-line"><span>Priority Rank</span><span class="priority-label high">Critical</span></div>
+                        </div>
+                    </div>
+
+                    <div class="inner-item-card">
+                        <div class="card-meta-row">
+                            <div>
+                                <h4>Butter Croissants</h4>
+                                <p>Batch code: CR-14</p>
+                            </div>
+                            <span class="status-pill completed">Proofed</span>
+                        </div>
+                        <div class="detail-list-specs">
+                            <div class="spec-line"><span>Target Quantity</span><span>120 Units</span></div>
+                            <div class="spec-line"><span>Assigned Lead</span><span>Apprentice Clara</span></div>
+                            <div class="spec-line"><span>Est. Finish Time</span><span>12:15 PM</span></div>
+                            <div class="spec-line"><span>Priority Rank</span><span class="priority-label medium">Medium</span></div>
+                        </div>
+                    </div>
+
+                    <div class="inner-item-card">
+                        <div class="card-meta-row">
+                            <div>
+                                <h4>Gluten-Free Seeded Loaf</h4>
+                                <p>Batch code: GF-02</p>
+                            </div>
+                            <span class="status-pill pending">Staged</span>
+                        </div>
+                        <div class="detail-list-specs">
+                            <div class="spec-line"><span>Target Quantity</span><span>15 Units</span></div>
+                            <div class="spec-line"><span>Assigned Lead</span><span>Baker Jean-Louis</span></div>
+                            <div class="spec-line"><span>Est. Finish Time</span><span>01:30 PM</span></div>
+                            <div class="spec-line"><span>Priority Rank</span><span class="priority-label low">Low</span></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="ui-card">
+                <div class="card-header-block">
+                    <div class="card-title-area">
+                        <h3>Raw Inventory Status</h3>
+                        <p>Critical baking staple tracking metrics</p>
+                    </div>
+                </div>
+                <div class="table-responsive-wrapper">
+                    <table class="premium-data-table">
+                        <thead>
+                            <tr>
+                                <th>Ingredient</th>
+                                <th>Stock Level</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>T55 French Flour</strong></td>
+                                <td>240 kg / 500kg</td>
+                                <td><span class="status-pill completed">Optimal</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Normandy Butter (Unsalted)</strong></td>
+                                <td>15 kg / 80kg</td>
+                                <td><span class="status-pill active-run">Restock Ordered</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Valrhona Dark Chocolate 70%</strong></td>
+                                <td>45 kg / 60kg</td>
+                                <td><span class="status-pill completed">Optimal</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Fresh Madagascar Vanilla Pods</strong></td>
+                                <td>200 g / 1000g</td>
+                                <td><span class="status-pill pending">Critically Low</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+
+        <div class="dashboard-grid-2">
+            <section class="ui-card">
+                <div class="card-header-block">
+                    <div class="card-title-area">
+                        <h3>Active Team Shifts Roster</h3>
+                        <p>Kitchen and floor team placement schedules</p>
+                    </div>
+                </div>
+                <div class="flex-cards-grid">
+                    <div class="inner-item-card">
+                        <div class="card-meta-row">
+                            <div>
+                                <h4>Jean-Louis Durand</h4>
+                                <p>Master Artisan Baker</p>
+                            </div>
+                            <span class="status-pill completed">On Shift</span>
+                        </div>
+                        <div class="detail-list-specs" style="margin-top:8px;">
+                            <div class="spec-line"><span>Daily Hours</span><span>04:00 AM — 12:00 PM</span></div>
+                            <div class="spec-line"><span>Assigned Deck</span><span>Oven Station 01 & 02</span></div>
+                        </div>
+                    </div>
+
+                    <div class="inner-item-card">
+                        <div class="card-meta-row">
+                            <div>
+                                <h4>Sarah Lindqvist</h4>
+                                <p>Front-of-House Lead Cashier</p>
+                            </div>
+                            <span class="status-pill completed">On Shift</span>
+                        </div>
+                        <div class="detail-list-specs" style="margin-top:8px;">
+                            <div class="spec-line"><span>Daily Hours</span><span>07:30 AM — 04:30 PM</span></div>
+                            <div class="spec-line"><span>Assigned Deck</span><span>Main Counter Registry</span></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="ui-card">
+                <div class="card-header-block">
+                    <div class="card-title-area">
+                        <h3>Patron Feedback Loop</h3>
+                        <p>Recent satisfaction verified reviews from verified buyers</p>
+                    </div>
+                </div>
+                <div class="flex-cards-grid">
+                    <div class="inner-item-card review-card-layout">
+                        <div class="card-meta-row">
+                            <div>
+                                <h4>Amélie Beaulieu</h4>
+                                <p style="font-size:0.75rem; color:var(--text-muted);">Purchased: Custom Patisserie Order</p>
+                            </div>
+                            <div class="stars-row">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                        </div>
+                        <p class="review-text-quote">"The crumb structure on the custom sourdough boules was absolutely breathtaking. It was the absolute highlight centerpiece of our family brunch gathering!"</p>
+                    </div>
+
+                    <div class="inner-item-card review-card-layout">
+                        <div class="card-meta-row">
+                            <div>
+                                <h4>Devon Carter</h4>
+                                <p style="font-size:0.75rem; color:var(--text-muted);">Purchased: Almond Croissants Pack</p>
+                            </div>
+                            <div class="stars-row">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+                            </div>
+                        </div>
+                        <p class="review-text-quote">"Remarkable laminated pastry flake density. My only small wish was that the classic frangipane filling was spread a tiny bit more evenly across the tips."</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="dashboard-split-layout">
+            <section class="ui-card">
+                <div class="card-header-block">
+                    <div class="card-title-area">
+                        <h3>Product Performance Analysis</h3>
+                        <p>Visual pure-CSS tracking of volume movement distribution metrics</p>
+                    </div>
+                </div>
+                <div class="css-chart-flex-container">
+                    <div class="chart-row-element">
+                        <div class="chart-row-label-space">
+                            <span>Organic Sourdough Boule</span>
+                            <span><strong>142 Sold</strong> (45%)</span>
+                        </div>
+                        <div class="chart-track-bg">
+                            <div class="chart-fill-bar" style="width: 45%;"></div>
+                        </div>
+                    </div>
+
+                    <div class="chart-row-element">
+                        <div class="chart-row-label-space">
+                            <span>Classic Almond Croissant</span>
+                            <span><strong>98 Sold</strong> (32%)</span>
+                        </div>
+                        <div class="chart-track-bg">
+                            <div class="chart-fill-bar" style="width: 32%;"></div>
+                        </div>
+                    </div>
+
+                    <div class="chart-row-element">
+                        <div class="chart-row-label-space">
+                            <span>Pain au Chocolat Royale</span>
+                            <span><strong>74 Sold</strong> (23%)</span>
+                        </div>
+                        <div class="chart-track-bg">
+                            <div class="chart-fill-bar" style="width: 23%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="ui-card">
+                <div class="card-header-block">
+                    <div class="card-title-area">
+                        <h3>Logistics & Courier Routing</h3>
+                        <p>Pending custom high-value priority delivery dispatch tracking</p>
+                    </div>
+                </div>
+                <div class="flex-cards-grid" style="grid-template-columns:1fr; gap:16px;">
+                    <div class="inner-item-card" style="padding:16px;">
+                        <div class="card-meta-row">
+                            <div>
+                                <h4 style="font-size:0.88rem;">Grand Plaza Hotel Catering</h4>
+                                <p style="font-size:0.78rem;">Eta Dispatch: 11:15 AM</p>
+                            </div>
+                            <span class="status-pill active-run" style="font-size:0.7rem;">Staged for Route</span>
+                        </div>
+                        <p style="font-size:0.8rem; color:var(--text-muted); margin-top:4px;"><i class="fa-solid fa-location-dot"></i> 742 West Rosemary Boulevard, Suite B</p>
+                    </div>
+
+                    <div class="inner-item-card" style="padding:16px;">
+                        <div class="card-meta-row">
+                            <div>
+                                <h4 style="font-size:0.88rem;">Isabella Vance (Custom Cake Party)</h4>
+                                <p style="font-size:0.78rem;">Eta Dispatch: 01:45 PM</p>
+                            </div>
+                            <span class="status-pill pending" style="font-size:0.7rem;">Kitchen Final Polish</span>
+                        </div>
+                        <p style="font-size:0.8rem; color:var(--text-muted); margin-top:4px;"><i class="fa-solid fa-location-dot"></i> 14 Hopewell Residential Ring, Court 4</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+    </main>
+</div>
+
+<footer class="master-app-footer">
+    <div class="footer-content-alignment">
+        <div class="footer-meta-block">
+            <h4>ROSEBAKERY Manager</h4>
+            <p>This enterprise web dashboard solution is a conceptual mock implementation built engineered for operational tracking metrics as a final technical verification layout portfolio piece.</p>
+            <p style="margin-top:16px; font-size:0.75rem;" class="footer-app-version">Application Deployment Version v2.4.1-Stable Production</p>
+        </div>
+        
+        <div class="footer-links-row">
+            <div class="footer-links-column">
+                <h5>Internal Workspace</h5>
+                <a href="#help">Documentation Hub</a>
+                <a href="#support">Technical Support Desk</a>
+                <a href="#api">Local Terminal API Node</a>
+            </div>
+            <div class="footer-links-column">
+                <h5>Regulatory Core</h5>
+                <a href="#privacy">Privacy Guard Protocols</a>
+                <a href="#terms">Terms of Application Operation</a>
+                <a href="#security">Kitchen Identity Cryptography</a>
+            </div>
+            <div class="footer-links-column" style="text-align: right; justify-content: flex-end;">
+                <p style="font-size: 0.82rem; color: var(--text-muted);">Designed & Developed by</p>
+                <p style="font-size: 0.95rem; font-weight: 500; color: var(--accent-rose-deep);">Sabillah Okta Ramadhani</p>
+                <p style="font-size: 0.72rem; color: var(--text-muted); margin-top:4px; max-width:240px; line-height:1.3;">Computer Programming Final Project Exhibition Showcase Prototype Execution.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+```
